@@ -9,8 +9,8 @@
             <br />
         }
         <div>
-            <button style="@game.lstyle">←</button>
-            <button style="@game.rstyle">→</button>
+            <button @onmousedown="mousedownL" @onmouseup="mouseupL" style="@game.lstyle">←</button>
+            <button @onmousedown="mousedownR" @onmouseup="mouseupR" style="@game.rstyle">→</button>
         </div>
     </div>
 
@@ -24,6 +24,23 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+    }
+
+    private void mousedownL()
+    {
+        game.buttonLActive = true;
+    }
+    private void mousedownR()
+    {
+        game.buttonRActive = true;
+    }
+    private void mouseupL()
+    {
+        game.buttonLActive = false;
+    }
+    private void mouseupR()
+    {
+        game.buttonRActive = false;
     }
 
 

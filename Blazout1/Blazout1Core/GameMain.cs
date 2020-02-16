@@ -85,8 +85,8 @@ namespace Blazout1Core
             _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
         }
 
-        private bool buttonLActive = false;
-        private bool buttonRActive = false;
+        public bool buttonLActive = false;
+        public bool buttonRActive = false;
 
         private const string style0 = "width: 20em; height:5em; background-color:gray";
         private const string style1 = "width: 20em; height:5em; background-color:red";
