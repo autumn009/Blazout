@@ -1,3 +1,21 @@
 ﻿<div class="my-component">
     This Blazor component is defined in the <strong>Blazout1Core</strong> package.
+
+    <div id="vvram" style="font-family:monospace">
+@for (int y = 0; y < VVRAM.vvramHeight; y++)
+{
+    for (int x = 0; x < VVRAM.vvramWidth; x++)
+    {
+        @game.Vvram.GetChar(x, y);
+    }
+    <br />
+}
+    </div>
 </div>
+
+@code{
+    private GameMain game = new GameMain();
+
+
+
+}
