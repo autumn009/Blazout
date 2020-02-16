@@ -228,6 +228,15 @@ namespace Blazout1Core
             {
                 Vvram.SetChar(x, 0, WakuChar);
             }
+
+            for (int y = 3; y < 3+8; y++)
+            {
+                for (int x = 1; x < VVRAM.vvramWidth-1; x++)
+                {
+                    Vvram.SetChar(x, y, BlockChar);
+                }
+            }
+
             DrawPaddle();
             ResetBall();
             DrawBall();
