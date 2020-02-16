@@ -127,7 +127,15 @@ namespace Blazout1Core
         public void MoveBall(int dx, int dy)
         {
             Vvram.SetChar(ballX, ballY, SpaceChar);
+            // input delta drift
+            int ddx = 0;
+            if (ballY == VVRAM.vvramHeight - 2)
+            {
+                if (buttonLActive) ddx = -1;
+                if (buttonRActive) ddx = 1;
+            }
             ballX += dx;
+            if (ballX+ddx >= 1 && ballX+ddx < VVRAM.vvramWidth - 1) ballX += ddx;
             ballY += dy;
             Vvram.SetChar(ballX, ballY, BallChar);
         }
