@@ -13,6 +13,7 @@ namespace Blazout1Core
         private char[,] vvram = new char[vvramWidth, vvramHeight];
         public char GetChar(int x, int y)
         {
+            if (x < 0 || x >= vvramWidth || y < 0 || y >= vvramHeight) return GameMain.SpaceChar;
             return vvram[x, y];
         }
         public void SetChar(int x, int y, char ch)
@@ -62,6 +63,34 @@ namespace Blazout1Core
             dui?.Update();
         }
 
+        private int turnRightX()
+        {
+            if (ballDX == -1 && ballDY == -1) return 1;
+            if (ballDX == 1 && ballDY == -1) return 1;
+            if (ballDX == 1 && ballDY == 1) return -1;
+            return -1;
+        }
+        private int turnRightY()
+        {
+            if (ballDX == -1 && ballDY == -1) return -1;
+            if (ballDX == 1 && ballDY == -1) return 1;
+            if (ballDX == 1 && ballDY == 1) return 1;
+            return -1;
+        }
+        private int turnLeftX()
+        {
+            if (ballDX == -1 && ballDY == -1) return -1;
+            if (ballDX == 1 && ballDY == -1) return -1;
+            if (ballDX == 1 && ballDY == 1) return 1;
+            return 1;
+        }
+        private int turnLeftY()
+        {
+            if (ballDX == -1 && ballDY == -1) return 1;
+            if (ballDX == 1 && ballDY == -1) return -1;
+            if (ballDX == 1 && ballDY == 1) return -1;
+            return 1;
+        }
 
         public void DrawPaddle(int xbegin, int width)
         {
@@ -117,10 +146,38 @@ namespace Blazout1Core
             else
             {
                 // reflect ball
+                int X1 = turnRightX();
+                int Y1 = turnRightY();
+                int X2 = turnLeftX();
+                int Y2 = turnLeftY();
+                Console.WriteLine(X1);
+                Console.WriteLine(Y1);
+                Console.WriteLine(X2);
+                Console.WriteLine(Y2);
 
-                // TBW
-                ballDX = -ballDX;
-                ballDY = -ballDY;
+                bool v1 = Vvram.GetChar(ballX + X1, ballY + Y1) == SpaceChar;
+                bool v2 = Vvram.GetChar(ballX + X2, ballY + Y2) == SpaceChar;
+                Console.WriteLine(v1);
+                Console.WriteLine(v2);
+                if (v1 ^ v2)
+                {
+                    if (v1)
+                    {
+                        ballDX = X1;
+                        ballDY = Y1;
+                    }
+                    else
+                    {
+                        ballDX = X2;
+                        ballDY = Y2;
+                    }
+                }
+                else
+                {
+                    // reflect return
+                    ballDX = -ballDX;
+                    ballDY = -ballDY;
+                }
                 MoveBall(ballDX, ballDY);
             }
 
