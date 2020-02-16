@@ -57,6 +57,7 @@ namespace Blazout1Core
         public int ballDY = -1;
         public object UI = null;
         public int Score = 0;
+        public int LeftBlocks = 0;
 
         private void mainUpdate()
         {
@@ -207,6 +208,7 @@ namespace Blazout1Core
                             Score += 1;
                             break;
                     }
+                    LeftBlocks--;
                 }
             }
 
@@ -216,6 +218,15 @@ namespace Blazout1Core
                 isPlaying = false;
                 Vvram.SetString(12, 12, "　　　　　　　　　　　");
                 Vvram.SetString(12, 13, "　ＧＡＭＥ　ＯＶＥＲ　");
+                Vvram.SetString(12, 14, "　　　　　　　　　　　");
+                // update screen
+                mainUpdate();
+            }
+            else if (LeftBlocks == 0)
+            {
+                isPlaying = false;
+                Vvram.SetString(12, 12, "　　　　　　　　　　　");
+                Vvram.SetString(12, 13, "　　ＹＯＵ　ＷＩＮ　　");
                 Vvram.SetString(12, 14, "　　　　　　　　　　　");
                 // update screen
                 mainUpdate();
@@ -265,6 +276,7 @@ namespace Blazout1Core
                 for (int x = 1; x < VVRAM.vvramWidth-1; x++)
                 {
                     Vvram.SetChar(x, y, BlockChar);
+                    LeftBlocks++;
                 }
             }
 
