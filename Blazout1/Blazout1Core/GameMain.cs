@@ -44,6 +44,8 @@ namespace Blazout1Core
         public const int timerInterval = 100;
         public int ballX = 0;
         public int ballY = 0;
+        public int ballDX = -1;
+        public int ballDY = -1;
         public object UI = null;
 
         private void mainUpdate()
@@ -77,6 +79,8 @@ namespace Blazout1Core
         {
             ballX = paddleX + paddleWidth / 2;
             ballY = VVRAM.vvramHeight - 2;
+            ballDX = -1;
+            ballDY = -1;
         }
         public void MoveBall(int dx, int dy)
         {
@@ -96,9 +100,23 @@ namespace Blazout1Core
             DrawPaddle();
 
             // ball move
+            int nextX = ballX + ballDX;
+            int nextY = ballY + ballDY;
+            if( Vvram.GetChar(nextX,nextY) == SpaceChar )
+            {
+                MoveBall(ballDX, ballDY);
+            }
+            else
+            {
+                // reflect ball
 
+                // TBW
+                ballDX = -ballDX;
+                ballDY = -ballDY;
+                MoveBall(ballDX, ballDY);
+            }
 
-
+            // update screen
             mainUpdate();
             _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
         }
