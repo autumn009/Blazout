@@ -56,6 +56,7 @@ namespace Blazout1Core
         public int ballDX = -1;
         public int ballDY = -1;
         public object UI = null;
+        public int Score = 0;
 
         private void mainUpdate()
         {
@@ -143,7 +144,7 @@ namespace Blazout1Core
             // ball move
             int nextX = ballX + ballDX;
             int nextY = ballY + ballDY;
-            if( Vvram.GetChar(nextX,nextY) == SpaceChar )
+            if (Vvram.GetChar(nextX, nextY) == SpaceChar)
             {
                 MoveBall(ballDX, ballDY);
             }
@@ -177,6 +178,28 @@ namespace Blazout1Core
                     ballDY = -ballDY;
                 }
                 MoveBall(ballDX, ballDY);
+                if (Vvram.GetChar(nextX, nextY) == BlockChar)
+                {
+                    Vvram.SetChar(nextX, nextY, SpaceChar);
+                    switch (nextY)
+                    {
+                        case 3:
+                        case 4:
+                            Score += 7;
+                            break;
+                        case 5:
+                        case 6:
+                            Score += 5;
+                            break;
+                        case 7:
+                        case 8:
+                            Score += 3;
+                            break;
+                        default:
+                            Score += 1;
+                            break;
+                    }
+                }
             }
 
             // game over check
