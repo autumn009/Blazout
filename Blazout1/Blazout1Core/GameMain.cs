@@ -97,7 +97,11 @@ namespace Blazout1Core
             int y = VVRAM.vvramHeight - 1;
             for (int x = 1; x < VVRAM.vvramWidth-1; x++)
             {
+#if DEBUG
+                Vvram.SetChar(x, y, WakuChar);
+#else
                 Vvram.SetChar(x, y, SpaceChar);
+#endif
             }
             for (int i = 0; i < width; i++)
             {
