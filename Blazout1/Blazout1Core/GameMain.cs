@@ -58,6 +58,7 @@ namespace Blazout1Core
         public object UI = null;
         public int Score = 0;
         public int LeftBlocks = 0;
+        public bool IsCheat = false;
 
         private void mainUpdate()
         {
@@ -97,13 +98,12 @@ namespace Blazout1Core
         public void DrawPaddle(int xbegin, int width)
         {
             int y = VVRAM.vvramHeight - 1;
-            for (int x = 1; x < VVRAM.vvramWidth-1; x++)
+            for (int x = 1; x < VVRAM.vvramWidth - 1; x++)
             {
-#if DEBUG
-                Vvram.SetChar(x, y, WakuChar);
-#else
-                Vvram.SetChar(x, y, SpaceChar);
-#endif
+                if (IsCheat)
+                    Vvram.SetChar(x, y, WakuChar);
+                else
+                    Vvram.SetChar(x, y, SpaceChar);
             }
             for (int i = 0; i < width; i++)
             {
