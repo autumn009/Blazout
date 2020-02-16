@@ -9,8 +9,8 @@
             <br />
         }
         <div>
-            <button @onmousedown="mousedownL" @onmouseup="mouseupL" style="@game.lstyle">←</button>
-            <button @onmousedown="mousedownR" @onmouseup="mouseupR" style="@game.rstyle">→</button>
+            <canvas @onmousedown="mousedownL" @onmouseup="mouseupL" style="@game.lstyle">←</canvas>
+            <canvas @onmousedown="mousedownR" @onmouseup="mouseupR" style="@game.rstyle">→</canvas>
         </div>
     </div>
 
@@ -23,6 +23,7 @@
 
     protected override void OnInitialized()
     {
+        game.UI = this;
         base.OnInitialized();
     }
 
@@ -41,6 +42,10 @@
     private void mouseupR()
     {
         game.buttonRActive = false;
+    }
+    public void Update()
+    {
+        this.StateHasChanged();
     }
 
 

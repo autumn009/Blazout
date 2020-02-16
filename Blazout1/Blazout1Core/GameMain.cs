@@ -41,14 +41,22 @@ namespace Blazout1Core
         public const char BallChar = '●';
         public int paddleX = 12;
         public int paddleWidth = 5;
-        public const int timerInterval = 300;
+        public const int timerInterval = 100;
         public int ballX = 0;
         public int ballY = 0;
+        public object UI = null;
+
+        private void mainUpdate()
+        {
+            dynamic dui = UI;
+            dui?.Update();
+        }
+
 
         public void DrawPaddle(int xbegin, int width)
         {
             int y = VVRAM.vvramHeight - 1;
-            for (int x = 1; x < VVRAM.vvramHeight-1; x++)
+            for (int x = 1; x < VVRAM.vvramWidth-1; x++)
             {
                 Vvram.SetChar(x, y, SpaceChar);
             }
@@ -80,8 +88,18 @@ namespace Blazout1Core
 
         public void TimerProc(Task task)
         {
+            // paddle move
+            int dx = 0;
+            if (buttonLActive && paddleX >= 2) dx = -1;
+            if (buttonRActive && paddleX <= VVRAM.vvramWidth - 2 - paddleWidth) dx = 1;
+            paddleX += dx;
             DrawPaddle();
 
+            // ball move
+
+
+
+            mainUpdate();
             _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
         }
 
@@ -113,6 +131,7 @@ namespace Blazout1Core
             ResetBall();
             DrawBall();
 
+            mainUpdate();
             _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
         }
     }
