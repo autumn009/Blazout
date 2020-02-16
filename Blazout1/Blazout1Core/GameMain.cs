@@ -30,6 +30,14 @@ namespace Blazout1Core
                 }
             }
         }
+
+        internal void SetString(int x, int y, string s)
+        {
+            foreach (var c in s)
+            {
+                SetChar(x++, y, c);
+            }
+        }
     }
 
     public class GameMain
@@ -116,9 +124,22 @@ namespace Blazout1Core
                 MoveBall(ballDX, ballDY);
             }
 
-            // update screen
-            mainUpdate();
-            _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
+            // game over check
+            if ( ballY >= VVRAM.vvramHeight-1)
+            {
+                Vvram.SetString(12, 12, "　　　　　　　　　　　");
+                Vvram.SetString(12, 13, "　ＧＡＭＥ　ＯＶＥＲ　");
+                Vvram.SetString(12, 14, "　　　　　　　　　　　");
+                // update screen
+                mainUpdate();
+            }
+            else
+            {
+                // update screen
+                mainUpdate();
+
+                _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
+            }
         }
 
         public bool buttonLActive = false;
