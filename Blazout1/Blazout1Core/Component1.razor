@@ -10,8 +10,8 @@
             <br />
         }
         <div>
-            <canvas @onmousedown="mousedownL" @onmouseup="mouseupL" style="@game.lstyle">←</canvas>
-            <canvas @onmousedown="mousedownR" @onmouseup="mouseupR" style="@game.rstyle">→</canvas>
+            <img @onmousedown="mousedownL" @onmouseup="mouseupL" style="@game.lstyle" src="_content/Blazout1Core/left.jpg" />
+            <img @onmousedown="mousedownR" @onmouseup="mouseupR" style="@game.rstyle" src="_content/Blazout1Core/right.jpg" />
         </div>
         <button @onclick="playAgain" style="@game.PlayAgainVisibility">Play Again</button>
     </div>
