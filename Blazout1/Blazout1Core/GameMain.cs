@@ -127,6 +127,7 @@ namespace Blazout1Core
             // game over check
             if ( ballY >= VVRAM.vvramHeight-1)
             {
+                isPlaying = false;
                 Vvram.SetString(12, 12, "　　　　　　　　　　　");
                 Vvram.SetString(12, 13, "　ＧＡＭＥ　ＯＶＥＲ　");
                 Vvram.SetString(12, 14, "　　　　　　　　　　　");
@@ -153,8 +154,14 @@ namespace Blazout1Core
         public string lstyle => getStyle(buttonLActive);
         public string rstyle => getStyle(buttonRActive);
 
+        private bool isPlaying = false;
+
+        public string PlayAgainVisibility => isPlaying ? "visibility:hidden" : "visibility:visible";
+
+
         public GameMain()
         {
+            isPlaying = true;
             Vvram.FillScreen(SpaceChar);
             // draw waku line
             for (int y = 0; y < VVRAM.vvramHeight; y++)

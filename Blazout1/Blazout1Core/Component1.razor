@@ -12,6 +12,7 @@
             <canvas @onmousedown="mousedownL" @onmouseup="mouseupL" style="@game.lstyle">←</canvas>
             <canvas @onmousedown="mousedownR" @onmouseup="mouseupR" style="@game.rstyle">→</canvas>
         </div>
+        <button @onclick="playAgain" style="@game.PlayAgainVisibility">Play Again</button>
     </div>
 
 
@@ -43,6 +44,12 @@
     {
         game.buttonRActive = false;
     }
+    private void playAgain()
+    {
+        game = new GameMain();
+        game.UI = this;
+    }
+
     public void Update()
     {
         this.StateHasChanged();
