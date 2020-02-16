@@ -150,15 +150,9 @@ namespace Blazout1Core
                 int Y1 = turnRightY();
                 int X2 = turnLeftX();
                 int Y2 = turnLeftY();
-                Console.WriteLine(X1);
-                Console.WriteLine(Y1);
-                Console.WriteLine(X2);
-                Console.WriteLine(Y2);
 
                 bool v1 = Vvram.GetChar(ballX + X1, ballY + Y1) == SpaceChar;
                 bool v2 = Vvram.GetChar(ballX + X2, ballY + Y2) == SpaceChar;
-                Console.WriteLine(v1);
-                Console.WriteLine(v2);
                 if (v1 ^ v2)
                 {
                     if (v1)
