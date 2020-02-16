@@ -1,19 +1,30 @@
 ﻿<div class="my-component">
     <div id="vvram" style="font-family:monospace;font-size:small;letter-spacing:-0.1em;line-height: 1em">
-@for (int y = 0; y < VVRAM.vvramHeight; y++)
-{
-    for (int x = 0; x < VVRAM.vvramWidth; x++)
-    {
-        @game.Vvram.GetChar(x, y);
-    }
-    <br />
-}
+        @for (int y = 0; y < VVRAM.vvramHeight; y++)
+        {
+            for (int x = 0; x < VVRAM.vvramWidth; x++)
+            {
+                @game.Vvram.GetChar(x, y);
+            }
+            <br />
+        }
+        <div>
+            <button style="@game.lstyle">←</button>
+            <button style="@game.rstyle">→</button>
+        </div>
     </div>
+
+
+
 </div>
 
 @code{
     private GameMain game = new GameMain();
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
 
 
 }

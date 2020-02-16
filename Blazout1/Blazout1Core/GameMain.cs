@@ -48,7 +48,7 @@ namespace Blazout1Core
         public void DrawPaddle(int xbegin, int width)
         {
             int y = VVRAM.vvramHeight - 1;
-            for (int x = 0; x < VVRAM.vvramHeight; x++)
+            for (int x = 1; x < VVRAM.vvramHeight-1; x++)
             {
                 Vvram.SetChar(x, y, SpaceChar);
             }
@@ -84,6 +84,17 @@ namespace Blazout1Core
 
             _ = Task.Delay(timerInterval).ContinueWith(TimerProc);
         }
+
+        private bool buttonLActive = false;
+        private bool buttonRActive = false;
+
+        private const string style0 = "width: 20em; height:5em; background-color:gray";
+        private const string style1 = "width: 20em; height:5em; background-color:red";
+
+        private string getStyle(bool sw) => sw ? style1 : style0;
+
+        public string lstyle => getStyle(buttonLActive);
+        public string rstyle => getStyle(buttonRActive);
 
         public GameMain()
         {
