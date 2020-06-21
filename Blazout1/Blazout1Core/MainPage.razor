@@ -8,3 +8,11 @@ X:
 <br />
 
 [[[<a href="/Player">START GAME</a>]]]
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        VVRAM.ClearCache();
+    }
+}

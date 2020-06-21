@@ -45,6 +45,11 @@ namespace Blazout1Core
                 return _vvramHeight;
             }
         }
+        public static void ClearCache()
+        {
+            _vvramHeight = 0;
+            _vvramWidth = 0;
+        }
 
         private char[,] vvram = new char[vvramWidth, vvramHeight];
         public char GetChar(int x, int y)
