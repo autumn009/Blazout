@@ -15,26 +15,35 @@ namespace Blazout1Core
     {
         public const int vvramDefaultWidth = 40;
         public const int vvramDefaultHeight = 25;
+        private static int _vvramHeight = 0;
+        private static int _vvramWidth = 0;
         public static int vvramWidth
         {
             get
             {
-                if (int.TryParse(PARAMS.VvramWidth, out int x))
-                    return x;
-                else
-                    return vvramDefaultWidth;
+                if (_vvramWidth == 0)
+                {
+                    if (int.TryParse(PARAMS.VvramWidth, out int x) && x != 0)
+                        _vvramWidth = x;
+                    else
+                        _vvramWidth = vvramDefaultWidth;
+                }
+                return _vvramWidth;
             }
         }
         public static int vvramHeight
         {
             get
             {
-                if (int.TryParse(PARAMS.VvramHeight, out int y))
-                    return y;
-                else
-                    return vvramDefaultHeight;
+                if (_vvramHeight == 0)
+                {
+                    if (int.TryParse(PARAMS.VvramHeight, out int y) && y != 0)
+                        _vvramHeight = y;
+                    else
+                        _vvramHeight = vvramDefaultHeight;
+                }
+                return _vvramHeight;
             }
-
         }
 
         private char[,] vvram = new char[vvramWidth, vvramHeight];
