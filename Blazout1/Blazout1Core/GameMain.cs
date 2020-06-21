@@ -5,10 +5,37 @@ using System.Threading.Tasks;
 
 namespace Blazout1Core
 {
+    public class PARAMS
+    {
+        public static string VvramWidth { get; set; } = VVRAM.vvramDefaultWidth.ToString();
+        public static string VvramHeight { get; set; } = VVRAM.vvramDefaultHeight.ToString();
+    }
+
     public class VVRAM
     {
-        public const int vvramWidth = 40;
-        public const int vvramHeight = 25;
+        public const int vvramDefaultWidth = 40;
+        public const int vvramDefaultHeight = 25;
+        public static int vvramWidth
+        {
+            get
+            {
+                if (int.TryParse(PARAMS.VvramWidth, out int x))
+                    return x;
+                else
+                    return vvramDefaultWidth;
+            }
+        }
+        public static int vvramHeight
+        {
+            get
+            {
+                if (int.TryParse(PARAMS.VvramHeight, out int y))
+                    return y;
+                else
+                    return vvramDefaultHeight;
+            }
+
+        }
 
         private char[,] vvram = new char[vvramWidth, vvramHeight];
         public char GetChar(int x, int y)
