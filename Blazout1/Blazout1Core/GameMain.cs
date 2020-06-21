@@ -59,6 +59,7 @@ namespace Blazout1Core
         }
         public void SetChar(int x, int y, char ch)
         {
+            if (x < 0 || x >= vvramWidth || y < 0 || y >= vvramHeight) return;
             vvram[x, y] = ch;
         }
 
