@@ -23,7 +23,7 @@ namespace Blazout1Core
             {
                 if (_vvramWidth == 0)
                 {
-                    if (int.TryParse(PARAMS.VvramWidth, out int x) && x != 0)
+                    if (int.TryParse(PARAMS.VvramWidth, out int x) && (x >= 17))
                         _vvramWidth = x;
                     else
                         _vvramWidth = vvramDefaultWidth;
@@ -37,7 +37,7 @@ namespace Blazout1Core
             {
                 if (_vvramHeight == 0)
                 {
-                    if (int.TryParse(PARAMS.VvramHeight, out int y) && y != 0)
+                    if (int.TryParse(PARAMS.VvramHeight, out int y) && y >= 14)
                         _vvramHeight = y;
                     else
                         _vvramHeight = vvramDefaultHeight;
