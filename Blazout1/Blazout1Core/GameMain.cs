@@ -255,21 +255,25 @@ namespace Blazout1Core
             }
 
             // game over check
-            if ( ballY >= VVRAM.vvramHeight-1)
+            if (ballY >= VVRAM.vvramHeight - 1)
             {
                 isPlaying = false;
-                Vvram.SetString(12, 12, "　　　　　　　　　　　");
-                Vvram.SetString(12, 13, "　ＧＡＭＥ　ＯＶＥＲ　");
-                Vvram.SetString(12, 14, "　　　　　　　　　　　");
+                var x = (VVRAM.vvramWidth - 11) / 2;
+                var y = (VVRAM.vvramHeight - 3) / 2;
+                Vvram.SetString(x, y, "　　　　　　　　　　　");
+                Vvram.SetString(x, y + 1, "　ＧＡＭＥ　ＯＶＥＲ　");
+                Vvram.SetString(x, y + 2, "　　　　　　　　　　　");
                 // update screen
                 mainUpdate();
             }
             else if (LeftBlocks == 0)
             {
                 isPlaying = false;
-                Vvram.SetString(12, 12, "　　　　　　　　　　　");
-                Vvram.SetString(12, 13, "　　ＹＯＵ　ＷＩＮ　　");
-                Vvram.SetString(12, 14, "　　　　　　　　　　　");
+                var x = (VVRAM.vvramWidth - 11) / 2;
+                var y = (VVRAM.vvramHeight - 3) / 2;
+                Vvram.SetString(x, y, "　　　　　　　　　　　");
+                Vvram.SetString(x, y + 1, "　　ＹＯＵ　ＷＩＮ　　");
+                Vvram.SetString(x, y + 2, "　　　　　　　　　　　");
                 // update screen
                 mainUpdate();
             }
